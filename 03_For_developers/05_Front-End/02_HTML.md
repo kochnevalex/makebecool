@@ -566,7 +566,3 @@ __Форма с полями в ряд__
 ## Ссылки для чтения ##
 
 https://yandex.ru/support/webmaster/open-graph/intro-open-graph.xml — полноценный мануал от Яндекса.
-
-***
-
-![alt text](/images/prestashop-cosmos-buzz.png)
