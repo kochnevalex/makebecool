@@ -597,7 +597,6 @@ img {
  __Совет__ При верстке меню, нужно помнить что ссылки со страницы на эту же страницу (циклические) — это плохой тон. Активный и текущий элемент главного меню должен быть не ссылкой, а спаном.
 
 3. Для ссылок email-ов нужно всегда ставить mailto, для телефонов tel параметры . а для Скайпа skype:?call. Тогда можно сразу из страницы открыть почтовый клиент, или набрать телефон (будучи на сайте с мобильного).
-
 ```HTML
 <a href="mailto:mail@gmail.com">mail@gmail.com</a>
 <a href="tel:+380681669987">+3 8 (068) 166-99-87</a>
@@ -606,3 +605,138 @@ img {
 
 ***
 
+# HTML. Head #
+
+В head обязательно следует подключать теги < noscript > , где должны храниться линки к стилям, которые подключатся через js. Если у юзера по каким-либо причинам не работает javascript в браузере, то тогда эти теги позволят подключить постзагрузочные стили.
+
+Например:
+```HTML
+<noscript>
+  <link rel="stylesheet" href="" type="text/css">
+</noscript>
+```
+
+# HTML. Scripts #
+
+Скрипты подлкючаются либо через файл __jade/components/scripts.jade__, либо если Jade не используем — то подключаем чистым html.
+
+Схема подключения скриптов такая:
+
+```HTML
+<script>
+  var global = {
+    siteUrl: 'http://project.makebecool.pro/',
+    baseUrl: '/',
+    assetsUrl: '/assets/',
+    cultureKey: 'en',
+    validationMessages: {
+      name: 'Будьте добры, введите ваше имя',
+      phone: 'Корректный номер телефона имеет формат +98 (765) 432-11-00.',
+      email: 'Адрес электронной почты имеет формат site@mail.com.',
+      text: 'Здесь должно быть ваше сообщение.'
+    }
+  }
+
+</script>
+<script src="js/jquery/jquery-2.2.1.min.js"></script>
+<script src="js/jquery/plugins/validation/jquery.validate.js"></script>
+<script src="js/jquery/plugins/form/jquery.form.js"></script>
+<script src="js/jquery/plugins/inputmask/inputmask.min.js"></script>
+<script src="js/jquery/plugins/inputmask/jquery.inputmask.js"></script>
+<script src="js/jquery/plugins/textarea-autoresize/autosize.js"></script>
+<script src="js/jquery/plugins/is-in-viewport/isInViewport.js"></script>
+<script src="js/jquery/plugins/easing/jquery.easing.1.3.js"></script>
+<script src="js/jquery/plugins/disable-scroll/jquery.disablescroll.js"></script>
+<script src="js/jquery/plugins/slick/slick.js"></script>
+<script src="js/app/lib/site.js"></script>
+<script src="js/app/lib/siteMode.js"></script>
+<script src="js/app/mode/themeMode.js"></script>
+<script src="js/app/modules/formValidate.js"></script>
+<script src="js/app/modules/formAjax.js"></script>
+<script src="js/app/modules/header.js"></script>
+...
+```
+
+Сверху подключается объект с переменными для валидации, текущей языковой версией, урлами.
+
+__Важно__ Когда вы подключаете новый модуль, то необходимо его подключить и для программистов, в файл __assets/basetheme-elements/chunks/base/metaBase.tpl__. Забудете — МодХ версия слетит и не будет работать.
+
+***
+
+# HTML. Важные Meta #
+
+Список копипастов, обязательных к добавлению в <head> страницы
+
+```HTML
+<meta name="format-detection" content="telephone=no"> //Запрет автоопределения номеров телефонов в ссылки на Safari
+
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"> //Чтобы страница корректно масштабирова
+```
+
+***
+
+# HTML. Schema #
+
+  Что такое Schema.org? Это все про теги. Это совместная инициатива по разработке единой схемы для семантической разметки в __HTML5__.
+
+  Инициатива была запущена второго июня 2011 года создателями крупнейших поисковых систем — компаниями Google, Yahoo! и Microsoft , а первого ноября 2011 года к ней присоединилась Яндекс. Основной целью schema.org является помощь веб-разработчикам в создании качественных метаданных, что, в свою очередь, позволяет улучшать качество поиска. Метаданные на сайтах, использующие схемы, описанные на schema.org, могут быть напрямую проанализированы поисковыми роботами, помогая последним лучше «понимать» содержимое веб-ресурсов.
+
+  Лепить все подряд теги разметки не стоит, потому что больше — не значит лучше. Следует разумно анализировать элемент дизайна и в случае попадания под нужный критерий Schema.org его надобно разметить.
+
+  ## Основы разметки ##
+
+  Любая разметка Schema.org производится в два шага:
+
+  1. Оборачивание описания определенного типа в контейнер с указанием схемы разметки:
+  ```HTML
+  <div itemscope itemtype="http://schema.org/Organization"> ... </div>
+  ```
+
+  2. Разметка отдельных свойств с указанием на конкретное свойство схемы:
+  ```HTML
+  <span itemprop="streetAddress"> Льва Толстого, 16 </span>
+  ```
+
+  В итоге выходит вот такая картина:
+```HTML
+  <div itemscope itemtype="http://schema.org/Organization">
+    <span itemprop="name">Яндекс</span>
+    Контакты:
+    <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">Адрес:
+      <span itemprop="streetAddress">Льва Толстого, 16</span>
+      <span itemprop="postalCode"> 119021</span>
+      <span itemprop="addressLocality">Москва</span>,
+    </div>
+    Телефон:<span itemprop="telephone">+7 495 739–70–00</span>,
+    Факс:<span itemprop="faxNumber">+7 495 739–70–70</span>,
+    Электронная почта: <span itemprop="email">pr@yandex-team.ru</span>
+  </div>
+  ```
+
+  Семантическая разметка контента используется различными сервисами Яндекса:
+
+  * [Разметка товаров и их стоимости](https://yandex.ru/support/webmaster/supported-schemas/goods-prices.xml) помогает Поиску формировать специальные сниппеты для страниц с такой разметкой.
+  * [Разметка информации о программах](https://yandex.ru/support/webmaster/supported-schemas/software.xml) (приложениях, компьютерных программах, играх и т. д.) помогает Поиску формировать специальные сниппеты для страниц с такой разметкой.
+  * [Разметка](https://yandex.ru/support/webmaster/supported-schemas/recipe.xml) рецептов помогает Поиску формировать специальные сниппеты для страниц с такой разметкой.
+  * [Разметка описаний фильмов](https://yandex.ru/support/webmaster/supported-schemas/movie-description.xml) помогает Поиску формировать специальные сниппеты для страниц с такой разметкой.
+  * [Разметка творческих работ](https://yandex.ru/support/webmaster/supported-schemas/other-content.xml) помогает Поиску формировать специальные сниппеты для страниц с такой разметкой.
+  * [Разметка вопросов и ответов](https://yandex.ru/support/webmaster/supported-schemas/questions.xml) помогает Поиску выделять лучший ответ и формировать специальные сниппеты для страниц с такой разметкой.
+  * [Разметка рефератов и других подобных работ](https://yandex.ru/support/webmaster/supported-schemas/essay.xml) помогает Поиску формировать специальные сниппеты для страниц с такой разметкой.
+  * [Разметка словарных статей](https://yandex.ru/support/webmaster/supported-schemas/dictionaries.xml) помогает Яндекс.Словарям и Поиску формировать специальные сниппеты для страниц с такой разметкой.
+  * [Разметка данных об организации и ее адресе](https://yandex.ru/support/webmaster/supported-schemas/address-organization.xml) помогает Справочнику и Поиску формировать специальные сниппеты для страниц с такой разметкой.
+  * [Разметка информации об изображениях](https://yandex.ru/support/webmaster/supported-schemas/image.xml) помогает улучшить представление изображений на сервисе Яндекс.Картинки.
+  * [Разметка информации о видеороликах](https://yandex.ru/support/webmaster/supported-schemas/image.xml) помогает улучшить представление видеоматериалов.
+  * [Разметка отзывов об организациях](https://yandex.ru/support/webmaster/supported-schemas/review-organization.xml) позволяет отображать на сервисе Карты отзывы вместе с адресами организаций.
+  * [Разметка отзывов об автомобилях и тест-драйвах](https://yandex.ru/support/webmaster/supported-schemas/review-car.xml) помогает улучшить представление моделей на сервисе Яндекс.Авто и в поисковой выдаче.
+
+  Ссылки для чтения
+
+  http://ruschema.org/ — русскоязычный перевод оригинальных манулов.
+
+  https://yandex.ru/support/webmaster/schema-org — мануал от Яндекса.
+
+  https://developers.google.com/structured-data/testing-tool/ — инструмент для тестирования метаданных.
+
+  ***
+
+  
