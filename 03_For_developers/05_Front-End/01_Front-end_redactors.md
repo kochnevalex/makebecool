@@ -744,5 +744,72 @@ https://developers.google.com/structured-data/testing-tool/ — инструме
 
 ***
 
+# HTML. Формы #
+
+Цель этих гайдлайнов — стандартизировать все моменты разработки, чтобы каждый делал все одинаково и хорошо. Обычно происходит так: первый верстальщик создает одно, второрой другое, третий открывает и создает третью вариацию. Результатом несогласованности является неразбериха и хаос, который приводит к проблемам и срывам сроков разработки.
+
+Кроме того мы не сможет уменьшать число багов, за счет обкатки одного решения много раз, потому что это решение создается каждый раз заново.
+
+Стандартизация форм — это сокращение времени разработки, минимум багов и проблем.
+
+__Обычная форма с полями друг под другом__
+
+```HTML
+<div class="form-wrap">
+  <form action="signup.php" class="form" data-form="register" method="POST">
+    <div class="fline">
+      <input id="input-1" class="form-control" type="text" name="name" placeholder="Ваше имя:" required="">
+    </div>
+    <div class="fline error">
+      <input id="input-2" class="form-control error" type="email" name="email" placeholder="Ваш email:" required="">
+      <label for="input-2" class="error">Error</label>
+    </div>
+    <button type="submit" class="btn">Подать заявку</button>
+  </form>
+  <div class="fmessage form-success active">
+    <div class="form-message__ttl"></div>
+    <div class="form-message__desc"></div>
+  </div>
+  <div class="fmessage form-error">
+    <div class="form-message__ttl"></div>
+    <div class="form-message__desc"></div>
+  </div>
+</div>
+```
+
+__Форма с полями в ряд__
+
+```HTML
+<div class="form-wrap">
+  <form action="signup.php" class="form" data-form="register" method="POST">
+  <div class="col-lg-4">
+    <div class="fline">
+      <input id="input-1" class="form-control" type="text" name="name" placeholder="Ваше имя:" required="">
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="fline error">
+      <input id="input-2" class="form-control error" type="email" name="email" placeholder="Ваш email:" required="">
+      <label for="input-2" class="error">Error</label>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="fline error">
+      <input id="input-2" class="form-control error" type="email" name="email" placeholder="Ваш email:" required="">
+      <label for="input-2" class="error">Error</label>
+    </div>
+  </div>
+    <button type="submit" class="btn">Подать заявку</button>
+  </form>
+  <div class="fmessage form-success active">
+    <div class="form-message__ttl"></div>
+    <div class="form-message__desc"></div>
+  </div>
+  <div class="fmessage form-error">
+    <div class="form-message__ttl"></div>
+    <div class="form-message__desc"></div>
+  </div>
+</div>
+```
 
 
