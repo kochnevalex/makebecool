@@ -107,40 +107,40 @@ _Совет_ Emmet входит в дефолтный пакет WebStorm.
 Любой фронт-енд нашего проекта имеет такую структуру:
 
 + 📁 basetheme-design
-..*📁 css
-..*📁 sass
-..*📁 base — обнуление стилей браузеров, типографика
-...*_normalize.sass
-..*📁 components — компоненты
-...*_header.sass
-...*_footer.sass
-_breadcrumbs.sass
-_forms.sass
-_buttons.sass
-...
-..*📁 critical — загрузочные стили
-_critical-style.sass
+..* 📁 css
+..* 📁 sass
+..* 📁 base — обнуление стилей браузеров, типографика
+...* _normalize.sass
+..* 📁 components — компоненты
+...* _header.sass
+...* _footer.sass
+...* _breadcrumbs.sass
+...* _forms.sass
+...* _buttons.sass
+...* ...
+...* ..*📁 critical — загрузочные стили
+...* _critical-style.sass
 ..*📁 fonts — шрифты в base64 формате, каждое начертание в своем файле
-_base-bold.sass
-_base-bold-italic.sass
+...* _base-bold.sass
+...* _base-bold-italic.sass
 ...
-..*📁 helpers — переменные, цвета, миксины
-_colors.sass
-_mixins.sass
-_typography.sass
-_variables.sass
-..*📁 layout — сетка
-_grid.sass
-_grid-mixins.sass
-_responsive-utilites.sass
-..*📁 parts — элементы дизайна, которые не являются чистыми компонентами
-404.sass
-contacts.sass
-...
-..*📁 vendors — сторонние плагины, каждый плагин в своей папке
-..*📁 slick
-..*📁 jquery-validate
-..*📁 font-awesome
+..* 📁 helpers — переменные, цвета, миксины
+...* _colors.sass
+...* _mixins.sass
+...* _typography.sass
+...* _variables.sass
+..* 📁 layout — сетка
+...* _grid.sass
+...* _grid-mixins.sass
+...* _responsive-utilites.sass
+..* 📁 parts — элементы дизайна, которые не являются чистыми компонентами
+...* 404.sass
+...* contacts.sass
+...* ...
+..* 📁 vendors — сторонние плагины, каждый плагин в своей папке
+..* 📁 slick
+..* 📁 jquery-validate
+..* 📁 font-awesome
 ...* base64-fonts.sass — сборщик всех шрифтов
 ...* critical.sass — сборщик critical.css
 ...* main-style.sass — сборщик основного стиля
