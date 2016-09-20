@@ -278,7 +278,9 @@ __Придерживайтесь этих этапов и будет вам сч
 
 В HTML используем только индентацию пробелами — только 2 пробела. Настроить это можно в WebStorm вот так:
 
-''File → Setings → Editor → Code Style → HTML
+'''
+File → Setings → Editor → Code Style → HTML
+'''
 
 __Tab size:__ 1, __Indent size:__ 2.
 
@@ -286,4 +288,234 @@ __Tab size:__ 1, __Indent size:__ 2.
 
 По умолчанию, WebStorm создает файлы с кодировкой windows-1251. Это приведет к проблемам с русскоязычным текстом и прочими символами. Нужно установить кодировку utf-8.
 
-''File → Setings → Editor → File Encodings
+'''
+File → Setings → Editor → File Encodings
+'''
+
+***
+
+= Комментирование HTML =
+
+Коммент в html выглядит так:
+
+'''
+<!-- This element will be shown by adding "active" class
+============================================= -->
+'''
+
+Комменты нужно писать на английском, потому что мы ориентируем продукт как можно большему числу потребителей. Если это комменты только для программиста — пишем их на русском.
+
+Комментировать нужно код, который не очевиден. Не обязательно комментировать все, только то, что нужно объяснить.
+
+***
+
+= HTML. Темплейт страницы =
+
+Темплейт страницы можно скачать [тут](file:///D:/makebecool/html/storage/template.html).
+
+= HTML. Семантика HTML5 =
+
+Главным ориентиром в семантике html5 являются мануалы от w3org — http://www.w3.org/TR/html5/ . Нужно быть в курсе современной семантики, использовать ее с умом. Если сомневаетесь — смотрите w3org.
+
+Основная философия использования семантики html5 для нас — в замене обезличенных дивов на более адресные.
+
+> Например, вы делаете верстку и перед вами серия повторяющихся блоков с заголовком, картинкой, ссылкой на полную страницу. Этот фрагмент можно сделать обычными дивами, однако у нас есть article, который по сути здесь подходит. Почему бы его не использовать? Если есть возможность сделать верстку более семантичной — нужно это делать, потому что это можно сделать.
+<__main__> — тег должен содержать главный контент страницы. Этот контент напрямую относится к теме документа, причем, все его содержимое должно быть уникально на странице и не должно отображаться где-либо еще на сайте. Повторяющийся на нескольких страницах контент (логотип, окно поиска, ссылки в футере и т.д.) не следует помещать внутри элемента <main>. Нельзя использовать больше одного этого тега на странице, и его нельзя вкладывать в <article>, <section>, <aside>, <header>, <footer>.
+
+'''
+<main>
+  <h1>Graduation</h1>
+
+  <nav> //тут тег nav иcпользуется внутри main, потому что навигация происходит внутри самого main
+    <ul>
+      <li><a href="#ceremony">Ceremony</a></li>
+      <li><a href="#graduates">Graduates</a></li>
+      <li><a href="#awards">Awards</a></li>
+    </ul>
+  </nav>
+
+  <H2 id="ceremony">Ceremony</H2>
+
+  <p>Opening Procession</p>
+  <p>Speech by Valedictorian</p>
+  <p>Speech by Class President</p>
+  <p>Prexentation of Diplomas</p>
+  <p>Closing Speech by Headmaster</p>
+
+  <h2 id="graduates">Graduates</h2>
+  <ul>
+    <li>Eileen Williams</li>
+    <li>Andy Maseyk</li>
+    <li>Blanca Sainz Garcia</li>
+    <li>Clara Faulkner</li>
+    <li>Gez Lemon</li>
+    <li>Eloisa Faulkner</li>
+  </ul>
+
+  <h2 id="awards">Awards</h2>
+    <ul>
+      <li>Clara Faulkner</li>
+      <li>Eloisa Faulkner</li>
+      <li>Blanca Sainz Garcia</li>
+    </ul>
+</main>
+<footer> Copyright 2012 B.lawson</footer>
+'''
+
+Детальнее тут: http://www.w3.org/TR/html5/grouping-content.html#the-main-element
+
+<__aside__> — тег используется для выделения содержания, непосредственно связанного с окружающим контентом, но которое может рассматриваться и отдельно. Это могут быть боковые сноски (как в книгах), группы элементов <nav>, цифры или цитаты. То есть этот блок относится к определенному контенту, но может быть вынесен отдельно справа или слева.
+
+<main>
+  <h1>Graduation</h1>
+
+  <nav>
+    <ul>
+      <li><a href="#ceremony">Ceremony</a></li>
+      <li><a href="#graduates">Graduates</a></li>
+      <li><a href="#awards">Awards</a></li>
+    </ul>
+  </nav>
+
+  <aside> //Тег aside содержит блоки, относящиеся к основному контенту ниже
+    <nav>
+      <h1>My blogroll</h1>
+        <ul>
+          <li>
+            <a href="http://blog.example.com/">Example Blog</a>
+          </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <H2 id="ceremony">Ceremony</H2>
+
+  <p>Opening Procession</p>
+  <p>Speech by Valedictorian</p>
+  <p>Speech by Class President</p>
+  <p>Prexentation of Diplomas</p>
+  <p>Closing Speech by Headmaster</p>
+</main>
+<footer> Copyright 2012 B.lawson</footer>
+>Детальнее тут: http://www.w3.org/TR/html5/sections.html#the-aside-element
+
+<header> — элемент используется для представления вводного контента к статье или веб-странице. Обычно он содержит заглавие или какие-либо метаданные, относящиеся к данному контенту, например, дата публикации статьи или оглавление (внутри элемента <nav>) для более длинного документа. Элемент <header> будет связан с ближайшим секционным элементом, обычно это прямой родитель в структуре страницы. Заголовки <h1> – <h6> тут могу быть, а могу и не быть.
+
+<header> //тут может быть заголовок, подзаголовок, навигация к этой странице, дата, картинка-превью
+  <h1>Little Green Guys With Guns</h1>
+  <nav>
+    <ul>
+      <li><a href="/games">Games</a>
+      <li><a href="/forum">Forum</a>
+      <li><a href="/download">Download</a>
+    </ul>
+  </nav>
+  <h2>Important News</h2>
+  <p>To play today's games you will need to update your client.</p>
+  <h2>Games</h2>
+</header>
+<p>Основной контент страницы дальше</p>
+Детальнее тут: http://www.w3.org/TR/html5/sections.html#the-header-element
+
+<footer> — используется для представления такой информации о разделе, как автор, авторские права (копирайты), ссылки на связанные веб-страницы. Футер необязательно должен быть внизу страницы. Рассматривайте этот тег больше как элемент из типографической верстки.
+
+<footer>
+  <nav>
+    <section>
+      <h1>Articles</h1>
+      <p><img src="" alt="">Go to the gym with our somersaults class! <a href="#">Part 2</a></p>
+      <p><img src="" alt="">Our guest writer Lara shows you how to bumble through the bars. <a href="#">Read more...</a></p>
+      <p><img src="" alt="">The chips are down, now all that's left is a potato. <a href="#">Read more...</a></p>
+    </section>
+    <ul>
+      <li>
+        <a href="/about">About us...</a>
+      </li>
+      <li>
+        <a href="/feedback">Send feedback!</a>
+      </li>
+      <li>
+        <a href="/sitemap">Sitemap</a>
+      </li>
+    </ul>
+  </nav>
+  <p><small>Copyright © 2015 The Snacker — <a href="#">Terms of Service</a></small></p>
+</footer>
+Детальнее тут: http://www.w3.org/TR/html5/sections.html#the-footer-element
+
+<nav> — элемент используется для разметки группы ссылок на внешние страницы или разделы внутри текущей страницы. Он хорошо подходит как для основной навигации по сайту, так и по оглавлению или постам. Не все группы ссылок должны быть в этом теге, а только те, которые отражают главные навигационные блоки. Например в футере тоже могут быть навигационные ссылки, однако использовать здесь <nav> излишне, если это только не единственная группа навигационных ссылок на странице.
+
+<nav> //Тег <nav> необязательно содержит списки, например тут показана простая навигация в тексте (ссылки)
+  <h1>Navigation</h1>
+  <p>You are on my home page. To the north lies <a href="#">my blog</a>, from whence the sounds of battle can be heard. To the east you can see a large mountain, upon which many <a href="#">school papers</a> are littered. Far up thus mountain you can spy a little figure who appears to be me, desperately scribbling a <a href="#">thesis</a>.</p>
+  <p>To the west are several exits. One fun-looking exit is labeled <a href="#">"games"</a>. Another more boring-looking exit is labeled <a href="#">ISP™</a>.</p>
+  <p>To the south lies a dark and dank <a href="#">contacts page</a>. Cobwebs cover its disused entrance, and at one point you see a rat run quickly out of the page.</p>
+</nav>
+Детальнее тут: http://www.w3.org/TR/html5/sections.html#the-nav-element
+
+<article> — тег должен содержать часть самодостаточной информации, которая может быть вырвана из контекста всей страницы без потери смысла. Это блок может быть размножен, реиспользован с разным контентом. Это могут быть: новость, статья в блоге, комментарии пользователя, превью статьи, интерактивный виджет страницы. Это может быть и небольшой блок, но который визуально и логически можно выделить в отдельную сущность, имеющую свой смысл.
+
+<article>// Пример блока из блога, где использованы <header> и <footer>. Да, так бывает.
+  <header>
+    <h1>The Very First Rule of Life</h1>
+    <p><time datetime="2009-10-09">3 days ago</time></p>
+    <link href="#">
+  </header>
+  <p>If there's a microphone anywhere near you, assume it's hot and sending whatever you're saying to the world. Seriously.</p>
+  <p>...</p>
+  <footer>
+    <a href="#">Show comments...</a>
+  </footer>
+</article>
+Детальнее тут: http://www.w3.org/TR/html5/sections.html#the-article-element
+
+<section> — элемент используется для представления группы связанного контента. Его применение похоже на <article> с главным отличием, что допускается отсутствие смысла содержимого внутри элемента <section> вне контекста самой страницы. По сути это тег, которым можно оборачивать содержимое, объединяя его в общую группу, например это группа записей блога, группа отзывов, блок логотипов. Рекомендуется использовать теги <h1> – <h6> для обозначения темы секции.
+
+<section> //Секция с заголовком и артиклами внутри
+  <h1>Blog posts</h1>
+  <article>
+    <header>
+      <h1>The Very First Rule of Life</h1>
+      <p><time datetime="2009-10-09">3 days ago</time></p>
+      <link href="#">
+    </header>
+    <p>If there's a microphone anywhere near you, assume it's hot and sending whatever you're saying to the world.</p>
+    <p>...</p>
+    <footer>
+      <a href="#">Show comments...</a>
+    </footer>
+  </article>
+  <article>
+    <header>
+      <h1>The Very Second Rule of Life</h1>
+      <p><time datetime="2009-10-10">2 days ago</time></p>
+      <link href="#">
+    </header>
+    <p>If there's a microphone anywhere near you, assume it's hot and sending whatever you're saying to the world.</p>
+    <p>...</p>
+    <footer>
+      <a href="#">Show comments...</a>
+    </footer>
+  </article>
+</section>
+Детальнее тут: http://www.w3.org/TR/html5/sections.html#the-section-element
+
+<time> — машинно понимаемый элемент дял передачи дат, времени, временных зон, длительности времени. Атрибут datetime пишется в специальном формате. Внутри тега time не должно быть никакой вложенности, если нет атрибута datetime.
+
+<article>
+  <h1>Big tasks</h1>
+  <footer>Published <time itemprop="published" datetime="2009-08-29">two days ago</time>.</footer>
+  <p>Today, I went out and bought a bike for my kid.</p>
+</article>
+Детальнее тут: http://www.w3.org/TR/html5/text-level-semantics.html#the-time-element
+
+Важно Общий смысл w3org в семантических тегах можно расценивать как типографические элементы из книжной, журнальной и печатной продукции. Больше вчитывайтесь в оригинальную спецификацию W3org, только там написано все как должно быть.
+
+Ссылки для чтения
+
+http://www.smashingmagazine.com/2011/11/html5-semantics/ — HTML5 Semantics от Bruce Lawson.
+
+http://dev.w3.org/html5/html-author/ — портянка текста от w3.org.
+
+https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5 — мануал от Mozilla.
+
