@@ -60,11 +60,11 @@ _Совет_ Emmet входит в дефолтный пакет WebStorm.
         * base64-fonts.css — собранные шрифты в base64 формате
         * critical.css — собранный critical css
         * main-style.css — собранный основной стиль
-    *📁 fonts — шрифты, каждый шрифт в своей папке
+    * 📁 fonts — шрифты, каждый шрифт в своей папке
         * open-sans
         * roboto
         * ...
-    *📁 jade — папка с jade страницами
+    * 📁 jade — папка с jade страницами
          *📁 components — компоненты jade
              * header.jade
              * footer.jade
